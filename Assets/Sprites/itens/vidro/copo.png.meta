@@ -103,10 +103,10 @@ TextureImporter:
       name: copo_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 4
-        width: 22
-        height: 26
+        x: 44
+        y: 37
+        width: 152
+        height: 182
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

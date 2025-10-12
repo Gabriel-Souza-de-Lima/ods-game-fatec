@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c6571e0cb5fc60742acda5df3e649caf
+guid: 398c9f7b1af437844a9e65db745a6eb3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3452070352657992247
-    second: papelao_0
+      213: -1171956429884772057
+    second: "papel\xE3o_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: papelao_0
+      name: "papel\xE3o_0"
       rect:
         serializedVersion: 2
-        x: 3
+        x: 27
         y: 0
-        width: 29
-        height: 34
+        width: 193
+        height: 240
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 73a46d522b738ef20800000000000000
-      internalID: 3452070352657992247
+      spriteID: 721bb7816df5cbfe0800000000000000
+      internalID: -1171956429884772057
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      papelao_0: 3452070352657992247
+      "papel\xE3o_0": -1171956429884772057
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

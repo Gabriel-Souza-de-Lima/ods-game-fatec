@@ -29,8 +29,14 @@ public class UIPauseController : MonoBehaviour
 
     public static bool IsPaused { get; private set; }
 
+    // -------- Singleton opcional --------
+    private static UIPauseController _instance;
+    // ------------------------------------
+
     private void Awake()
     {
+        _instance = this;
+
         if (pauseButton) pauseButton.onClick.AddListener(Pause);
         if (resumeButton) resumeButton.onClick.AddListener(Resume);
 
@@ -48,6 +54,11 @@ public class UIPauseController : MonoBehaviour
 
         if (freezeParticles)
             _particles = FindObjectsByType<ParticleSystem>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+    }
+
+    private void OnDestroy()
+    {
+        if (_instance == this) _instance = null;
     }
 
     private void Update()
@@ -111,4 +122,24 @@ public class UIPauseController : MonoBehaviour
 
         EventSystem.current?.SetSelectedGameObject(null);
     }
+
+    // -------- API estática segura --------
+    public static void SetPaused(bool paused)
+    {
+        // Se houver uma instância na cena, delega para ela (garante UI/áudio/animators)
+        if (_instance != null)
+        {
+            if (paused) _instance.Pause();
+            else _instance.Resume();
+            return;
+        }
+
+        // Fallback: controla apenas timeScale/áudio estático
+        IsPaused = paused;
+        Time.timeScale = paused ? 0f : 1f;
+        AudioListener.pause = paused;
+    }
+
+    public static void ForceUnpause() => SetPaused(false);
+    // ------------------------------------
 }
