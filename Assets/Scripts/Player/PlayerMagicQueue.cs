@@ -34,6 +34,17 @@ public class PlayerMagicQueue : MonoBehaviour
         RaiseChanged();
     }
 
+    /// <summary>
+    /// Troca a magia Atual com a Próxima sem consumir nem sortear uma nova.
+    /// Útil para permitir que o jogador alterne entre as duas (ex.: Tab).
+    /// </summary>
+    public void SwapCurrentAndNext()
+    {
+        // se quiser, pode checar se current == next e não fazer nada, mas não é obrigatório
+        (current, next) = (next, current);
+        RaiseChanged();
+    }
+
     public WasteType Current => current;
     public WasteType Next => next;
 
@@ -43,5 +54,11 @@ public class PlayerMagicQueue : MonoBehaviour
         return (WasteType)v;
     }
 
-    private void RaiseChanged() => OnChanged?.Invoke(current, next);
+    private void RaiseChanged()
+    {
+        // opcional: manter um estado global da magia atual
+        PlayerMagicState.Current = current;
+
+        OnChanged?.Invoke(current, next);
+    }
 }

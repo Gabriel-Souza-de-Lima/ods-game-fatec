@@ -10,11 +10,14 @@ public class UIPlayerShooter : MonoBehaviour
     [SerializeField] private RectTransform projectilePrefab;
     [SerializeField] private RectTransform shootParent;
     [SerializeField] private PlayerMagicQueue magicQueue;
-    [SerializeField] private RectTransform projectileLayer; // alvo correto dos projéteis
+    [SerializeField] private RectTransform projectileLayer;
 
     [Header("Disparo")]
     [SerializeField] private float fireCooldown = 0.25f;
     [SerializeField] private KeyCode fireKey = KeyCode.Space;
+
+    [Header("Swap de Magia")]
+    [SerializeField] private KeyCode swapKey = KeyCode.Tab;
 
     private float _cd;
 
@@ -28,9 +31,21 @@ public class UIPlayerShooter : MonoBehaviour
     {
         if (UIPauseController.IsPaused || LifeController.IsGameOver) return;
 
+        // swap de magia ao apertar Tab (ou a tecla que você configurar)
+        if (Input.GetKeyDown(swapKey))
+        {
+            TrySwapMagic();
+        }
+
         _cd -= Time.deltaTime;
         if (_cd <= 0f && Input.GetKey(fireKey))
             TryShoot();
+    }
+
+    private void TrySwapMagic()
+    {
+        if (!magicQueue) return;
+        magicQueue.SwapCurrentAndNext();
     }
 
     private void TryShoot()

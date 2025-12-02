@@ -77,13 +77,23 @@ public class UIProjectile : MonoBehaviour
             {
                 if (trash.Type == magicType)
                 {
+                    // Acertou o lixo certo: recompensa
                     ScoreController.I?.AddBasePoints(10);
                     trash.DestroySelf();
                     DestroySelf();
                 }
-                else if (destroyOnMismatch)
+                else
                 {
-                    DestroySelf();
+                    // ERROU o tipo de lixo: penalidade
+                    ScoreController.I?.AddPenalty(5); // ajusta a quantidade de punição como quiser
+
+                    if (destroyOnMismatch)
+                    {
+                        // mantém o comportamento atual de sumir com o projétil se essa flag estiver ligada
+                        DestroySelf();
+                    }
+
+                    // Se destroyOnMismatch for false, o projétil segue viagem (mas já foi punido)
                 }
                 return;
             }
